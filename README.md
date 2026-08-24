@@ -1,49 +1,69 @@
 # British Airways Data Science Job Simulation
 
-## Overview
+## Project Overview
 
-This repository documents my work and key learnings from the **British Airways Data Science Job Simulation on Forage**, completed in August 2026.
+This repository documents my work from the **British Airways Data Science Job Simulation on Forage**, completed in August 2026.
 
-The simulation included two practical business problems:
+The simulation involved two practical business problems:
 
 1. **Modeling lounge eligibility at Heathrow Terminal 3**
 2. **Predicting customer booking behaviour**
 
-The experience combined business assumptions, data analysis, predictive modeling, model evaluation, data visualization, and communication of analytical findings.
+The project provided hands-on experience in translating business questions into analytical assumptions, exploring customer data, building and evaluating a machine learning model, interpreting model outputs, and communicating findings to business stakeholders.
 
 ---
 
-## Task 1 — Lounge Eligibility Modeling
+## Project Deliverables
 
-### Objective
+| Task | Deliverable | Description |
+|---|---|---|
+| Task 1 | [Lounge Eligibility Analysis](lounge-eligibility-analysis.xlsx.xlsx) | Excel-based analysis using business assumptions to model lounge eligibility |
+| Task 2 | [Customer Booking Predictive Model](customer-booking-predictive-model.ipynb) | Python notebook containing EDA, data preparation, Random Forest modeling and evaluation |
+| Presentation | [Executive Summary](customer-booking-model-summary.pptx) | One-slide PowerPoint communicating model performance and business findings |
+| Visualization | [Feature Importance](feature-importance.png) | Visualization of the top predictors of booking completion |
+| Certificate | [Forage Completion Certificate](british-airways-forage-certificate.pdf) | British Airways Data Science Job Simulation completion certificate |
+
+> **Dataset:** The customer booking dataset contained 50,000 records and was provided as part of the British Airways Data Science Job Simulation on Forage. The original source dataset is not redistributed in this repository.
+
+---
+
+# Task 1 — Lounge Eligibility Modeling
+
+## Objective
 
 Estimate lounge eligibility at Heathrow Terminal 3 by translating business requirements and assumptions into a structured analytical model.
 
-### Key Learnings
+## What I Practiced
 
-- Developed assumptions from an ambiguous business problem
-- Translated business requirements into measurable inputs
-- Structured data to support lounge eligibility analysis
-- Considered how analytical assumptions affect operational planning
-- Communicated methodology and findings for business stakeholders
+- Developing assumptions from an ambiguous business problem
+- Translating business requirements into measurable inputs
+- Structuring data to support business analysis
+- Considering how analytical assumptions affect operational planning
+- Communicating methodology and findings clearly to stakeholders
 
-### Skills Practiced
+### Skills
 
-`Assumption Development` `Data Modeling` `Business Analysis` `Communication`
+`Assumption Development` `Data Modeling` `Business Analysis` `Communication` `Excel`
 
 ---
 
-## Task 2 — Predicting Customer Booking Behaviour
+# Task 2 — Predicting Customer Booking Behaviour
 
-### Objective
+## Objective
 
 Build a machine learning model to predict whether a customer will complete a flight booking.
 
-The dataset contained **50,000 customer booking records**.
+The analysis used **50,000 customer booking records**, with:
 
-### Exploratory Data Analysis
+`booking_complete`
 
-I explored booking behaviour across:
+as the target variable.
+
+---
+
+## Exploratory Data Analysis
+
+I explored booking completion across several customer and trip characteristics, including:
 
 - Sales channel
 - Trip type
@@ -53,67 +73,84 @@ I explored booking behaviour across:
 - Preferred seat preference
 - In-flight meal preference
 
-### Selected EDA Findings
+### Selected Findings
 
-- Internet bookings had a higher completion rate than mobile bookings.
-- Round-trip bookings had a higher completion rate than one-way and circle trips.
-- Customers booking within 30 days of departure had the highest completion rate among the purchase-lead groups analysed.
-- Malaysia had the highest completion rate among the ten largest booking origins by booking volume.
-- Customers requesting ancillary services generally showed higher booking completion rates.
+**Sales Channel**
+
+Internet customers had a booking completion rate of approximately **15.48%**, compared with **10.84%** for mobile customers.
+
+**Trip Type**
+
+Round-trip customers had the highest booking completion rate at approximately **15.06%**, compared with **5.17%** for one-way and **4.31%** for circle-trip customers.
+
+**Purchase Lead**
+
+Customers booking within **0–30 days** had the highest completion rate among the analysed purchase-lead groups at approximately **16.45%**.
+
+**Booking Origin**
+
+Among the ten largest booking origins by booking volume, **Malaysia had the highest completion rate at approximately 34.40%**.
+
+Australia generated the largest booking volume but had a much lower completion rate of approximately **5.04%**.
+
+**Ancillary Preferences**
+
+Customers requesting extra baggage, preferred seats, or in-flight meals generally showed higher booking completion rates than customers who did not request these services.
 
 ---
 
 ## Data Preparation
 
-Categorical variables were converted into numerical features using **one-hot encoding**.
+Categorical variables were transformed using **one-hot encoding**.
 
-The target variable was:
+The final modeling dataset contained:
 
-`booking_complete`
+- **50,000 observations**
+- **918 predictor variables**
 
-The data was divided into:
+The dataset was split into:
 
-- **80% training data**
-- **20% testing data**
+- **80% training data — 40,000 records**
+- **20% testing data — 10,000 records**
 
 A stratified split was used to preserve the target-class distribution.
 
 ---
 
-## Machine Learning
+## Machine Learning Model
 
 I trained a **Random Forest Classifier** to predict booking completion.
 
-Random Forest was selected because it can:
+Random Forest was selected because it:
 
-- Capture nonlinear relationships
-- Handle a large number of features
-- Provide feature importance for model interpretation
+- Handles nonlinear relationships
+- Works effectively with a large number of features
+- Provides feature importance for model interpretation
 
-Class weighting was used because completed bookings represented a minority of observations.
+Because completed bookings represented a minority class, class weighting was used during training.
 
 ---
 
-## Model Performance
+## Model Evaluation
 
 | Metric | Result |
 |---|---:|
 | Test ROC-AUC | **0.793** |
-| 5-Fold CV ROC-AUC | **0.786** |
+| Mean 5-Fold CV ROC-AUC | **0.786** |
 | Accuracy | **0.83** |
 | Precision — Completed Booking | **0.42** |
 | Recall — Completed Booking | **0.38** |
 | F1-score — Completed Booking | **0.40** |
 
-Because the target variable was imbalanced, **accuracy alone was not sufficient** to assess model quality.
+The shuffled stratified 5-fold cross-validation produced a mean ROC-AUC of approximately **0.786**, with highly consistent scores across folds.
 
-The cross-validation ROC-AUC scores were highly consistent after using shuffled stratified folds, suggesting stable ranking performance.
+Because booking completion was imbalanced, **accuracy alone was not sufficient to evaluate model quality**. ROC-AUC, precision, recall, and F1-score were therefore considered alongside accuracy.
 
 ---
 
 ## Feature Importance
 
-The strongest predictive signals identified by the Random Forest model were:
+The Random Forest model identified the following variables as some of the strongest predictive signals:
 
 | Feature | Importance |
 |---|---:|
@@ -124,66 +161,107 @@ The strongest predictive signals identified by the Random Forest model were:
 | Flight duration | **4.25%** |
 | Number of passengers | **4.01%** |
 | Booking origin — Malaysia | **3.28%** |
+| Wants in-flight meals | **2.00%** |
+| Wants extra baggage | **1.69%** |
+| Wants preferred seat | **1.57%** |
 
-The results suggest that **booking timing and trip characteristics were among the strongest predictors of booking completion**.
+### Top 10 Predictors of Booking Completion
 
-> Feature importance represents predictive contribution and should not be interpreted as causation.
+![Top 10 Predictors of Booking Completion](feature-importance.png)
+
+> **Note:** Feature importance represents predictive contribution within the model and should not be interpreted as causation.
 
 ---
 
 ## Business Interpretation
 
-The model demonstrated useful predictive ability, but identifying customers who actually complete a booking remained more difficult than identifying non-completers.
+The analysis suggests that **booking timing and trip characteristics are important signals of booking completion**.
 
-Rather than immediately using the model as an automated decision rule, it could be explored as a **customer ranking or targeting signal**.
+Purchase lead, length of stay, and flight hour were the three strongest individual predictors in the Random Forest model.
 
-Potential next steps include:
+The exploratory analysis also highlighted several behavioural differences:
+
+- Internet customers converted at a higher rate than mobile customers.
+- Round-trip customers showed substantially higher completion rates than other trip types.
+- High booking volume did not necessarily mean high conversion. Australia generated the most bookings, while Malaysia showed a substantially higher completion rate among the ten largest booking origins.
+- Customers selecting ancillary services generally demonstrated higher booking completion rates.
+
+The model showed useful ranking ability, although predicting customers who actually completed a booking remained more difficult than predicting non-completers.
+
+---
+
+## Potential Next Steps
+
+Before operational deployment, I would explore:
 
 - Classification threshold tuning
-- Alternative class-balancing approaches
+- Alternative class-balancing techniques
 - Additional feature engineering
 - Comparison with alternative classification models
-- Further validation before operational deployment
+- Further out-of-sample validation
+
+The model could initially be explored as a **customer propensity ranking or targeting signal** rather than an automated decision rule.
 
 ---
 
-## Tools & Skills
+# Executive Summary
 
-### Technical
+The final findings were summarized in a **single-slide PowerPoint presentation** for a business stakeholder.
 
-`Python` `Pandas` `scikit-learn` `Random Forest` `Machine Learning` `Data Modeling` `Data Visualization` `EDA` `Cross-Validation` `Feature Importance`
+![Customer Booking Predictive Model Summary](customer-booking-model-summary.PNG)
 
-### Business
+### Presentation Files
 
-`Assumption Development` `Analytical Communication` `Business Interpretation` `PowerPoint`
+- [View / Download PowerPoint Summary](customer-booking-model-summary.pptx)
+- [View Presentation Preview](customer-booking-model-summary.PNG)
 
 ---
 
-## Key Takeaway
+# Tools & Skills
 
-This simulation reinforced that predictive modeling is not only about training a machine learning algorithm.
+### Data & Technical
 
-A complete analytical workflow also requires:
+`Python` `Pandas` `scikit-learn` `Random Forest` `Machine Learning` `Data Modeling` `Data Visualization` `Exploratory Data Analysis` `Cross-Validation` `Feature Importance` `Excel`
+
+### Business & Communication
+
+`Assumption Development` `Business Interpretation` `Analytical Communication` `PowerPoint`
+
+---
+
+# Key Takeaway
+
+The most important lesson from this simulation was that predictive modeling is not only about training an algorithm.
+
+A complete analytical workflow requires connecting each stage:
 
 **Business Problem → Assumptions → Data Exploration → Data Preparation → Modeling → Validation → Interpretation → Communication**
 
-The most valuable part of the exercise was connecting model performance and feature importance back to a business decision.
+The exercise reinforced the importance of evaluating a model with appropriate metrics, interpreting its outputs carefully, and translating technical findings into information that business stakeholders can use.
 
 ---
 
-## Certificate
+# Certificate
 
 **British Airways Data Science Job Simulation — Forage**
 
-Completed: **August 24, 2026**
+**Completed:** August 24, 2026
 
 Practical tasks completed:
 
 - Modeling lounge eligibility at Heathrow Terminal 3
 - Predicting customer buying behaviour
 
+[View / Download Certificate](british-airways-forage-certificate.pdf)
+
+### Certificate Preview
+
+![British Airways Data Science Job Simulation Certificate](british-airways-forage-certificate.png)
+
 ---
 
 ## Disclaimer
 
-This repository documents my personal learning and analysis from the Forage job simulation. Original simulation datasets and proprietary materials are not redistributed.
+This repository documents my personal learning, analysis, and deliverables from the British Airways Data Science Job Simulation on Forage.
+
+The original simulation dataset and proprietary source materials are **not redistributed** in this repository.
