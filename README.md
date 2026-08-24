@@ -17,7 +17,7 @@ The project provided hands-on experience in translating business questions into 
 
 | Task | Deliverable | Description |
 |---|---|---|
-| Task 1 | [Lounge Eligibility Analysis](lounge-eligibility-analysis.xlsx.xlsx) | Excel-based analysis using business assumptions to model lounge eligibility |
+| Task 1 | [Lounge Eligibility Analysis](lounge-eligibility-analysis.xlsx) | Excel-based analysis using business assumptions to model lounge eligibility |
 | Task 2 | [Customer Booking Predictive Model](customer-booking-predictive-model.ipynb) | Python notebook containing EDA, data preparation, Random Forest modeling and evaluation |
 | Presentation | [Executive Summary](customer-booking-model-summary.pptx) | One-slide PowerPoint communicating model performance and business findings |
 | Visualization | [Feature Importance](feature-importance.png) | Visualization of the top predictors of booking completion |
